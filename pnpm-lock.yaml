@@ -10,6 +10,9 @@ dependencies:
   '@nestjs/platform-express':
     specifier: ^10.0.0
     version: registry.npmmirror.com/@nestjs/platform-express@10.0.0(@nestjs/common@10.0.0)(@nestjs/core@10.0.0)
+  '@prisma/client':
+    specifier: ^5.8.1
+    version: registry.npmmirror.com/@prisma/client@5.8.1
   reflect-metadata:
     specifier: ^0.1.13
     version: registry.npmmirror.com/reflect-metadata@0.1.13
@@ -93,40 +96,58 @@ packages:
       source-map: 0.5.7
     dev: true
 
-  /@babel/plugin-syntax-async-generators@7.8.4:
+  /@babel/plugin-syntax-async-generators@7.8.4(@babel/core@7.23.7):
     resolution: {integrity: sha512-tycmZxkGfZaxhMRbXlPXuVFpdWlXpir2W4AMhSJgRKzk/eDlIXOhb2LHWoLpDF7TEHylV5zNhykX6KAgHJmTNw==, tarball: https://packages.aliyun.com/5f3dd3d4db0493ecef90d98d/npm/npm-registry/@babel/plugin-syntax-async-generators/-/@babel/plugin-syntax-async-generators-7.8.4.tgz}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': registry.npmmirror.com/@babel/core@7.23.7
       '@babel/helper-plugin-utils': registry.npmmirror.com/@babel/helper-plugin-utils@7.22.5
     dev: true
 
-  /@babel/plugin-syntax-json-strings@7.8.3:
+  /@babel/plugin-syntax-json-strings@7.8.3(@babel/core@7.23.7):
     resolution: {integrity: sha512-lY6kdGpWHvjoe2vk4WrAapEuBR69EMxZl+RoGRhrFGNYVK8mOPAW8VfbT/ZgrFbXlDNiiaxQnAtgVCZ6jv30EA==, tarball: https://packages.aliyun.com/5f3dd3d4db0493ecef90d98d/npm/npm-registry/@babel/plugin-syntax-json-strings/-/@babel/plugin-syntax-json-strings-7.8.3.tgz}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': registry.npmmirror.com/@babel/core@7.23.7
       '@babel/helper-plugin-utils': registry.npmmirror.com/@babel/helper-plugin-utils@7.22.5
     dev: true
 
-  /@babel/plugin-syntax-logical-assignment-operators@7.10.4:
+  /@babel/plugin-syntax-logical-assignment-operators@7.10.4(@babel/core@7.23.7):
     resolution: {integrity: sha512-d8waShlpFDinQ5MtvGU9xDAOzKH47+FFoney2baFIoMr952hKOLp1HR7VszoZvOsV/4+RRszNY7D17ba0te0ig==, tarball: https://packages.aliyun.com/5f3dd3d4db0493ecef90d98d/npm/npm-registry/@babel/plugin-syntax-logical-assignment-operators/-/@babel/plugin-syntax-logical-assignment-operators-7.10.4.tgz}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': registry.npmmirror.com/@babel/core@7.23.7
       '@babel/helper-plugin-utils': registry.npmmirror.com/@babel/helper-plugin-utils@7.22.5
     dev: true
 
-  /@babel/plugin-syntax-object-rest-spread@7.8.3:
+  /@babel/plugin-syntax-object-rest-spread@7.8.3(@babel/core@7.23.7):
     resolution: {integrity: sha512-XoqMijGZb9y3y2XskN+P1wUGiVwWZ5JmoDRwx5+3GmEplNyVM2s2Dg8ILFQm8rWM48orGy5YpI5Bl8U1y7ydlA==, tarball: https://packages.aliyun.com/5f3dd3d4db0493ecef90d98d/npm/npm-registry/@babel/plugin-syntax-object-rest-spread/-/@babel/plugin-syntax-object-rest-spread-7.8.3.tgz}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': registry.npmmirror.com/@babel/core@7.23.7
       '@babel/helper-plugin-utils': registry.npmmirror.com/@babel/helper-plugin-utils@7.22.5
     dev: true
 
-  /@babel/plugin-syntax-optional-chaining@7.8.3:
+  /@babel/plugin-syntax-optional-chaining@7.8.3(@babel/core@7.23.7):
     resolution: {integrity: sha512-KoK9ErH1MBlCPxV0VANkXW2/dw4vlbGDrFgz8bmUsBGYkFRcbRwMh6cIJubdPrkxRwuGdtCk0v/wPTKbQgBjkg==, tarball: https://packages.aliyun.com/5f3dd3d4db0493ecef90d98d/npm/npm-registry/@babel/plugin-syntax-optional-chaining/-/@babel/plugin-syntax-optional-chaining-7.8.3.tgz}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': registry.npmmirror.com/@babel/core@7.23.7
       '@babel/helper-plugin-utils': registry.npmmirror.com/@babel/helper-plugin-utils@7.22.5
     dev: true
 
-  /@babel/plugin-syntax-top-level-await@7.14.5:
+  /@babel/plugin-syntax-top-level-await@7.14.5(@babel/core@7.23.7):
     resolution: {integrity: sha512-hx++upLv5U1rgYfwe1xBQUhRmU41NEvpUvrp8jkrSCdvGSnM5/qdRMtylJ6PG5OFkBaHkbTAKTnd3/YyESRHFw==, tarball: https://packages.aliyun.com/5f3dd3d4db0493ecef90d98d/npm/npm-registry/@babel/plugin-syntax-top-level-await/-/@babel/plugin-syntax-top-level-await-7.14.5.tgz}
     engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
     dependencies:
+      '@babel/core': registry.npmmirror.com/@babel/core@7.23.7
       '@babel/helper-plugin-utils': registry.npmmirror.com/@babel/helper-plugin-utils@7.22.5
     dev: true
 
@@ -175,14 +196,23 @@ packages:
     hasBin: true
     dev: true
 
-  /ajv-formats@2.1.1:
+  /ajv-formats@2.1.1(ajv@8.12.0):
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    peerDependencies:
+      ajv: ^8.0.0
+    peerDependenciesMeta:
+      ajv:
+        optional: true
     dependencies:
       ajv: 8.12.0
     dev: true
 
-  /ajv-keywords@3.5.2:
+  /ajv-keywords@3.5.2(ajv@6.12.6):
     resolution: {integrity: sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==}
+    peerDependencies:
+      ajv: ^6.9.1
+    dependencies:
+      ajv: 6.12.6
     dev: true
 
   /ajv@6.12.6:
@@ -289,21 +319,22 @@ packages:
 
   /babel-preset-current-node-syntax@1.0.1(@babel/core@7.23.7):
     resolution: {integrity: sha512-M7LQ0bxarkxQoN+vz5aJPsLBn77n8QgTFmo8WK0/44auK2xlCXrYcUxHFxgU7qW5Yzw/CjmLRK2uJzaCd7LvqQ==}
+    peerDependencies:
+      '@babel/core': ^7.0.0
     dependencies:
-      '@babel/plugin-syntax-async-generators': 7.8.4
+      '@babel/core': registry.npmmirror.com/@babel/core@7.23.7
+      '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.23.7)
       '@babel/plugin-syntax-bigint': registry.npmmirror.com/@babel/plugin-syntax-bigint@7.8.3(@babel/core@7.23.7)
       '@babel/plugin-syntax-class-properties': registry.npmmirror.com/@babel/plugin-syntax-class-properties@7.12.13(@babel/core@7.23.7)
       '@babel/plugin-syntax-import-meta': registry.npmmirror.com/@babel/plugin-syntax-import-meta@7.10.4(@babel/core@7.23.7)
-      '@babel/plugin-syntax-json-strings': 7.8.3
-      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4
+      '@babel/plugin-syntax-json-strings': 7.8.3(@babel/core@7.23.7)
+      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.23.7)
       '@babel/plugin-syntax-nullish-coalescing-operator': registry.npmmirror.com/@babel/plugin-syntax-nullish-coalescing-operator@7.8.3(@babel/core@7.23.7)
       '@babel/plugin-syntax-numeric-separator': registry.npmmirror.com/@babel/plugin-syntax-numeric-separator@7.10.4(@babel/core@7.23.7)
-      '@babel/plugin-syntax-object-rest-spread': 7.8.3
+      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.23.7)
       '@babel/plugin-syntax-optional-catch-binding': registry.npmmirror.com/@babel/plugin-syntax-optional-catch-binding@7.8.3(@babel/core@7.23.7)
-      '@babel/plugin-syntax-optional-chaining': 7.8.3
-      '@babel/plugin-syntax-top-level-await': 7.14.5
-    transitivePeerDependencies:
-      - '@babel/core'
+      '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.23.7)
+      '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.23.7)
     dev: true
 
   /balanced-match@1.0.2:
@@ -2145,7 +2176,7 @@ packages:
         optional: true
     dependencies:
       ajv: 8.12.0
-      ajv-formats: 2.1.1
+      ajv-formats: 2.1.1(ajv@8.12.0)
       chokidar: 3.5.3
       jsonc-parser: registry.npmmirror.com/jsonc-parser@3.2.0
       rxjs: 7.8.1
@@ -3145,6 +3176,19 @@ packages:
     version: 0.1.0
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
     dev: true
+
+  registry.npmmirror.com/@prisma/client@5.8.1:
+    resolution: {integrity: sha512-xQtMPfbIwLlbm0VVIVQY2yqQVOxPwRQhvIp7Z3m2900g1bu/zRHKhYZJQWELqmjl6d8YwBy0K2NvMqh47v1ubw==, registry: https://packages.aliyun.com/5f3dd3d4db0493ecef90d98d/npm/npm-registry/, tarball: https://registry.npmmirror.com/@prisma/client/-/client-5.8.1.tgz}
+    name: '@prisma/client'
+    version: 5.8.1
+    engines: {node: '>=16.13'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dev: false
 
   registry.npmmirror.com/@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==, registry: https://packages.aliyun.com/5f3dd3d4db0493ecef90d98d/npm/npm-registry/, tarball: https://registry.npmmirror.com/@sinclair/typebox/-/typebox-0.27.8.tgz}
@@ -5211,7 +5255,7 @@ packages:
     dependencies:
       '@types/json-schema': registry.npmmirror.com/@types/json-schema@7.0.15
       ajv: 6.12.6
-      ajv-keywords: 3.5.2
+      ajv-keywords: 3.5.2(ajv@6.12.6)
     dev: true
 
   registry.npmmirror.com/send@0.18.0:
