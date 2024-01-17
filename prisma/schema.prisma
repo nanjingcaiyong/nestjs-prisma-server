@@ -12,7 +12,7 @@ datasource db {
 model story {
   id Int @id @default(autoincrement())
   creatorName String @db.VarChar(30) // 一个中文占三个字节，其他数字、英文、符号占一个字节，emoji占四个字节。一些复杂文字、繁体字占四个字节
-  createAt DateTime @default(now()) @db.Timestamp()
+  createAt DateTime @default(now())
   updateAt DateTime @updatedAt @db.Timestamp()
   description String @db.VarChar(300)
 }
