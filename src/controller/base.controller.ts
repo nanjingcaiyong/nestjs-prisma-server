@@ -1,8 +1,4 @@
-import {
-  ResultStatus,
-  Result,
-  ResultMessage,
-} from '@/common/status/result.status';
+import { ResultStatus, Result, ResultMessage } from '@/common/status';
 export class BaseController {
   JsonBackResult(status: ResultStatus): Result;
   JsonBackResult(status: ResultStatus, data: any): Result;

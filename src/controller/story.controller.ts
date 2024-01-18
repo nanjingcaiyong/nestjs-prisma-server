@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { BaseController } from '@/controller/base.controller';
-import { ResultStatus } from '@/common/status/result.status';
+import { ResultStatus } from '@/common/status';
 import { StoryService } from '@/service/story.service';
 
 @Controller('story')

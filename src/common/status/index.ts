@@ -1,6 +1,6 @@
 export enum ResultStatus {
   Success = '000000',
-  Fail = '001',
+  Fail = '000001',
   NoLogin = '002',
   Expired = '003',
   Empty = '004',
@@ -11,7 +11,7 @@ export enum ResultStatus {
 
 export const ResultMessage = {
   '000000': 'success',
-  '001': 'error',
+  '000001': 'error',
   '002': '未登录！',
   '003': '未登录/登录已过期，请先登录！',
   '004': '字段不能为空！',
