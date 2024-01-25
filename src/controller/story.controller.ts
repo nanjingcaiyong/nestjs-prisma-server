@@ -9,7 +9,7 @@ import {
 import { BaseController } from '@/controller/base.controller';
 import { ResultStatus } from '@/common/status';
 import { StoryService } from '@/service/story.service';
-import { StoryModel } from '@/model/story.entity';
+import { StoryDto } from '@/dto';
 
 @Controller('story')
 export class StoryController extends BaseController {
@@ -35,7 +35,7 @@ export class StoryController extends BaseController {
     return this.JsonBackResult(ResultStatus.Success, res);
   }
   @Post('create')
-  async create(@Body() params: StoryModel) {
+  async create(@Body() params: StoryDto) {
     await this.storyService.createOne(params);
     return this.JsonBackResult(ResultStatus.Success);
   }
