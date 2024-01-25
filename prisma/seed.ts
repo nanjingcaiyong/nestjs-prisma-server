@@ -7,17 +7,24 @@ async function main() {
 
   console.log('Seeding...');
 
-  const story = await prisma.story.create({
-    data: {
-      id: 1,
-      creatorName: 'admin',
-      description: '这是一条测试数据',
-      createAt: new Date(),
-      updateAt: new Date(),
-    },
+  const res = await prisma.page.createMany({
+    data: [
+      {
+        pageName: 'home',
+        description: '首页',
+      },
+      {
+        pageName: 'collection',
+        description: '商品集合页',
+      },
+      {
+        pageName: 'pdp',
+        description: '商品详情页',
+      },
+    ],
   });
 
-  console.log(story);
+  console.log('===>', res);
 }
 
 main()

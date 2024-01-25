@@ -9,10 +9,60 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model story {
-  id Int @id @default(autoincrement())
-  creatorName String @db.VarChar(30) // 一个中文占三个字节，其他数字、英文、符号占一个字节，emoji占四个字节。一些复杂文字、繁体字占四个字节
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt @db.Timestamp()
-  description String @db.VarChar(300)
+enum TrackType {
+  CPS
+  GA3
+  GA4
+}
+
+model Story {
+  id          Int       @id @default(autoincrement())
+  storyName   String    @db.VarChar(100)
+  creatorName String    @db.VarChar(30) // 一个中文占三个字节，其他数字、英文、符号占一个字节，emoji占四个字节。一些复杂文字、繁体字占四个字节
+  createAt    DateTime  @updatedAt @db.Timestamp()
+  updateAt    DateTime  @updatedAt @db.Timestamp()
+  status      Int       @default(1) @db.TinyInt
+  description String    @db.VarChar(300)
+  pages       StoryPage []
+}
+
+model Page {
+  id          Int       @id @default(autoincrement())
+  pageName    String    @unique @db.VarChar(60)
+  createAt    DateTime  @updatedAt @db.Timestamp()
+  updateAt    DateTime  @updatedAt @db.Timestamp()
+  status      Int       @default(1) @db.TinyInt
+  description String    @db.VarChar(300)
+  storys       StoryPage[]
+}
+
+model StoryPage {
+  story       Story     @relation(fields: [storyId], references: [id])
+  storyId     Int
+  page        Page      @relation(fields: [pageId], references: [id])
+  pageId      Int
+  createAt    DateTime  @updatedAt @db.Timestamp()
+  updateAt    DateTime  @updatedAt @db.Timestamp()
+  
+  @@id([storyId, pageId])
+}
+
+
+model Point {
+  id          Int       @id @default(autoincrement())
+  key         String    @db.VarChar(100)
+  creatorName String    @db.VarChar(30)
+  description String    @db.VarChar(300)
+  createAt    DateTime  @updatedAt @db.Timestamp()
+  updateAt    DateTime  @updatedAt @db.Timestamp()
+  status      Int       @default(1) @db.TinyInt
+} 
+
+model Track {
+  id          Int       @id @default(autoincrement())
+  type        TrackType
+  content     String    @db.VarChar(500)
+  createAt    DateTime  @updatedAt @db.Timestamp()
+  updateAt    DateTime  @updatedAt @db.Timestamp()
+  status      Int       @default(1) @db.TinyInt
 }
