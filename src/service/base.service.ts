@@ -60,5 +60,9 @@ export class BaseService<T extends Prisma.StoryCreateInput>
     });
   }
 
+  queryList() {
+    return this.entity.findMany();
+  }
+
   //#endregion
 }

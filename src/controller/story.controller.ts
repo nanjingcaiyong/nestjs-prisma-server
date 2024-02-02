@@ -19,8 +19,8 @@ export class StoryController extends BaseController {
 
   @Get('/')
   async list() {
-    // const list = await this.storyService.findOne({})
-    // return this.JsonBackResult(ResultStatus.Success, list);
+    const list = await this.storyService.queryList();
+    return this.JsonBackResult(ResultStatus.Success, list);
   }
 
   @Get('count')
