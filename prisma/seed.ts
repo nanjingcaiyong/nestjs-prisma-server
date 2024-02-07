@@ -4,7 +4,6 @@ const prisma = new PrismaClient({});
 
 async function main() {
   await prisma.story.deleteMany();
-
   console.log('Seeding...');
 
   const res = await prisma.page.createMany({

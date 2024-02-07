@@ -8,4 +8,8 @@ export class StoryService extends BaseService<StoryModel> {
   constructor() {
     super(Prisma.ModelName.Story);
   }
+
+  queryList() {
+    return this.entity.findMany();
+  }
 }

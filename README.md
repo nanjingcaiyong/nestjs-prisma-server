@@ -60,6 +60,7 @@ model User {
   cardId Int @map("card_id")
   // @@map 用于定义表名
   @@map("user")
+}
 ```
 
 如果要对索引、约束等命名的话参考官方文档: https://www.prisma.io/docs/orm/prisma-schema/data-model/database-mapping#using-custom-constraint--index-names
@@ -218,6 +219,3 @@ model User {
 - date          日期，用来记录年月日信息(2024-01-17 13:47:10.268)
 - datetime      日期时间，存储年月日和时间信息
 - time          用来记录时间或时间段
-
-
-
