@@ -7,7 +7,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { BaseController } from '@/controller/base.controller';
-import { ResultStatus } from '@/common/status';
+import { ResultStatus, Roles } from '@/common';
 import { StoryService } from '@/service/story.service';
 import { StoryDto } from '@/dto';
 
@@ -29,6 +29,7 @@ export class StoryController extends BaseController {
     // return this.JsonBackResult(ResultStatus.Success, { count });
   }
 
+  @Roles('admin')
   @Get('/:id')
   async queryById(@Param('id', ParseIntPipe) id: number) {
     const res = await this.storyService.findOne({ id });

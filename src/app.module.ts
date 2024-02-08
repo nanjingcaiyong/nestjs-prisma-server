@@ -4,10 +4,13 @@ import {
   MiddlewareConsumer,
   RequestMethod,
 } from '@nestjs/common';
-import { RouterModule } from '@/router/router.module';
-import { LoggerMiddleware } from '@/middleware/logger.middleware';
-import { APP_FILTER } from '@nestjs/core';
-import { HttpExceptionFilter } from './common/exceptions/http.exception';
+import {
+  RouterModule,
+  LoggerMiddleware,
+  AuthGuard,
+  HttpExceptionFilter,
+} from '@/common';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [RouterModule],
@@ -15,6 +18,10 @@ import { HttpExceptionFilter } from './common/exceptions/http.exception';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
     },
   ],
 })

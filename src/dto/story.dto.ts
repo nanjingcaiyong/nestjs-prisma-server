@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MaxLength, Contains } from 'class-validator';
+import { IsString, MaxLength } from 'class-validator';
 
 export class StoryDto {
   @IsString()
-  @Contains('hello')
+  // @Contains('hello')
   @MaxLength(4, {
     message: 'Title is too long',
   })
