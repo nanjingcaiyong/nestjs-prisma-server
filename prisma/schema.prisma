@@ -16,16 +16,6 @@ enum TrackType {
   GA4
 }
 
-model User {
-  id          Int    @id @default(autoincrement())
-  userName    String @db.VarChar(100)
-}
-
-model Role {
-  id          Int    @id @default(autoincrement())
-  roleName    String @db.VarChar(100)
-}
-
 model Story {
   id          Int       @id @default(autoincrement())
   storyName   String    @db.VarChar(100)

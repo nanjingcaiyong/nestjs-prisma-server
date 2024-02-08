@@ -9,7 +9,7 @@ import {
 import { Response } from 'express';
 import { Exception } from './excepotion';
 
-// @Catch(HttpException) // 只捕获Http异常
+// @Catch(HttpException) 装饰器将所需的元数据绑定到异常过滤器，告诉 Nest 这个特定的过滤器正在寻找 HttpException 类型的异常，而不是其他类型的异常
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: Error, host: ArgumentsHost) {
