@@ -16,54 +16,139 @@ enum TrackType {
   GA4
 }
 
+
 model Story {
   id          Int       @id @default(autoincrement())
-  storyName   String    @db.VarChar(100)
-  creatorName String    @db.VarChar(30) // 一个中文占三个字节，其他数字、英文、符号占一个字节，emoji占四个字节。一些复杂文字、繁体字占四个字节
-  createAt    DateTime  @updatedAt @db.Timestamp()
-  updateAt    DateTime  @updatedAt @db.Timestamp()
-  status      Int       @default(1) @db.TinyInt
-  description String    @db.VarChar(300)
+  storyName   String    @map("story_name") @db.VarChar(100)
+  creator     String    @db.VarChar(30) // 一个中文占三个字节，其他数字、英文、符号占一个字节，emoji占四个字节。一些复杂文字、繁体字占四个字节
+  description String    @db.VarChar(255)
   pages       StoryPage []
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
+  status      Int       @default(1) @db.TinyInt
+
+  @@map("storys")
 }
 
 model Page {
   id          Int       @id @default(autoincrement())
-  pageName    String    @unique @db.VarChar(60)
-  createAt    DateTime  @updatedAt @db.Timestamp()
-  updateAt    DateTime  @updatedAt @db.Timestamp()
-  status      Int       @default(1) @db.TinyInt
+  pageName    String    @map("page_name") @unique @db.VarChar(60)
   description String    @db.VarChar(300)
-  storys       StoryPage[]
+  storys      StoryPage[]
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
+  status      Int       @default(1) @db.TinyInt
+
+  @@map("pages")
 }
 
 model StoryPage {
   story       Story     @relation(fields: [storyId], references: [id])
-  storyId     Int
+  storyId     Int       @map("story_id")
   page        Page      @relation(fields: [pageId], references: [id])
-  pageId      Int
-  createAt    DateTime  @updatedAt @db.Timestamp()
-  updateAt    DateTime  @updatedAt @db.Timestamp()
+  pageId      Int       @map("page_id")
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
   
   @@id([storyId, pageId])
+
+  @@map("story_page")
 }
 
 
 model Point {
   id          Int       @id @default(autoincrement())
   key         String    @db.VarChar(100)
-  creatorName String    @db.VarChar(30)
+  creator     String    @db.VarChar(30)
   description String    @db.VarChar(300)
-  createAt    DateTime  @updatedAt @db.Timestamp()
-  updateAt    DateTime  @updatedAt @db.Timestamp()
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6) // 6 是精确到微秒
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
   status      Int       @default(1) @db.TinyInt
+
+  @@map("points")
 } 
 
 model Track {
   id          Int       @id @default(autoincrement())
   type        TrackType
   content     String    @db.VarChar(500)
-  createAt    DateTime  @updatedAt @db.Timestamp()
-  updateAt    DateTime  @updatedAt @db.Timestamp()
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
   status      Int       @default(1) @db.TinyInt
+
+  @@map("tracks")
 }
+
+
+// 用户
+model User {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique @db.VarChar(100)
+  email       String    @unique @db.VarChar(100)
+  no          String    @unique @db.VarChar(50) // 员工编号
+  jobName     String    @map("job_name") @db.VarChar(100)  // 职位信息
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
+  status      Int       @default(1) @db.TinyInt
+
+  @@map("users")
+}
+
+// 账号
+model Account {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(100)
+  email       String    @db.VarChar(100)
+  password    String    @db.VarChar(100)
+  state       Int       @default(0)
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
+  status      Int       @default(1) @db.TinyInt
+
+  @@map("accounts")
+}
+
+// 角色
+model Role {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(100)
+  creator     String    @db.VarChar(100)
+  menus       RoleMenu[]
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
+  status      Int       @default(1) @db.TinyInt
+
+  @@map("roles")
+}
+
+// 菜单
+model Menu {
+  id          Int       @id @default(autoincrement())
+  name        String?    @db.VarChar(100)
+  code        String?    @db.VarChar(50)
+  description String?    @db.VarChar(500)
+  path        String?    @db.VarChar(100)
+  type        Int
+  pid         Int
+  creator     String    @db.VarChar(100)
+  roles       RoleMenu[]
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
+  status      Int       @default(1) @db.TinyInt
+
+  @@map("menus")
+}
+
+model RoleMenu {
+  role        Role      @relation(fields: [roleId], references: [id])
+  roleId      Int       @map("role_id")
+  menu        Menu      @relation(fields: [menuId], references: [id])
+  menuId      Int       @map("menu_id")
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
+
+  @@id([roleId, menuId])
+
+  @@map("role_menu")
+}
+

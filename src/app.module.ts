@@ -5,15 +5,16 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import {
-  RouterModule,
   LoggerMiddleware,
   AuthGuard,
   HttpExceptionFilter,
+  RouterModule,
 } from '@/common';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
+import { AuthModule } from '@/auth/auth.module';
 
 @Module({
-  imports: [RouterModule],
+  imports: [RouterModule, AuthModule],
   providers: [
     {
       provide: APP_FILTER,

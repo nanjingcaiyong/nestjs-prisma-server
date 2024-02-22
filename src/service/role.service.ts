@@ -3,8 +3,8 @@ import { BaseService } from './base.service';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class StoryService extends BaseService {
+export class RoleService extends BaseService {
   constructor() {
-    super(Prisma.ModelName.Story);
+    super(Prisma.ModelName.Role);
   }
 }

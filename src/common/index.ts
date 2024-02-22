@@ -5,3 +5,4 @@ export * from './middleware';
 export * from './pipes';
 export * from './router';
 export * from './status';
+export * from './applications';

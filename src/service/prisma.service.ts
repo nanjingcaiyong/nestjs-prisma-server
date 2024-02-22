@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma, PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class BaseService {
+export class PrismaService {
   private prisma: PrismaClient;
 
   constructor(private modelName: Prisma.ModelName) {
@@ -18,26 +18,8 @@ export class BaseService {
    * @param where lambda
    * @returns
    */
-  async queryById<T>(id: number): Promise<T> {
-    return this.prisma[this.modelName].findUnique({
-      where: {
-        id,
-      },
-    });
-  }
-
-  /**
-   * @description 条件查询
-   * @param where lambda
-   * @returns
-   */
-  async query<T>(where: T): Promise<T> {
-    // this.prisma.point.findFirst({
-    //   where
-    // })
-    return this.prisma[this.modelName].findFirst({
-      where,
-    });
+  async queryById<T>(where: any): Promise<T> {
+    return this.prisma[this.modelName].findFirst({ where });
   }
 
   /**
