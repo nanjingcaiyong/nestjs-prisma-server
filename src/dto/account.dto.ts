@@ -15,7 +15,7 @@ export class AccountDto {
   @MinLength(6)
   password: string;
 }
-export class LoginDto {
+export class SignDto {
   @ApiProperty()
   @IsString()
   account: string;
