@@ -4,14 +4,10 @@ import {
   MiddlewareConsumer,
   RequestMethod,
 } from '@nestjs/common';
-import {
-  LoggerMiddleware,
-  AuthGuard,
-  HttpExceptionFilter,
-  RouterModule,
-} from '@/common';
+import { LoggerMiddleware, HttpExceptionFilter, RouterModule } from '@/common';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
-import { AuthModule } from '@/auth/auth.module';
+import { RolesGuard } from '@/modules/auth/guards/role.guard';
+import { AuthModule } from '@/modules/auth/auth.module';
 
 @Module({
   imports: [RouterModule, AuthModule],
@@ -22,7 +18,7 @@ import { AuthModule } from '@/auth/auth.module';
     },
     {
       provide: APP_GUARD,
-      useClass: AuthGuard,
+      useClass: RolesGuard,
     },
   ],
 })

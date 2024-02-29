@@ -22,7 +22,7 @@ model Story {
   storyName   String    @map("story_name") @db.VarChar(100)
   creator     String    @db.VarChar(30) // 一个中文占三个字节，其他数字、英文、符号占一个字节，emoji占四个字节。一些复杂文字、繁体字占四个字节
   description String    @db.VarChar(255)
-  pages       StoryPage []
+  pages       Page []
   createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
   updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
   status      Int       @default(1) @db.TinyInt
@@ -34,27 +34,13 @@ model Page {
   id          Int       @id @default(autoincrement())
   pageName    String    @map("page_name") @unique @db.VarChar(60)
   description String    @db.VarChar(300)
-  storys      StoryPage[]
+  storys      Story[]
   createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
   updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
   status      Int       @default(1) @db.TinyInt
 
   @@map("pages")
 }
-
-model StoryPage {
-  story       Story     @relation(fields: [storyId], references: [id])
-  storyId     Int       @map("story_id")
-  page        Page      @relation(fields: [pageId], references: [id])
-  pageId      Int       @map("page_id")
-  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
-  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
-  
-  @@id([storyId, pageId])
-
-  @@map("story_page")
-}
-
 
 model Point {
   id          Int       @id @default(autoincrement())
@@ -79,14 +65,19 @@ model Track {
   @@map("tracks")
 }
 
-
 // 用户
 model User {
   id          Int       @id @default(autoincrement())
-  name        String    @unique @db.VarChar(100)
-  email       String    @unique @db.VarChar(100)
-  no          String    @unique @db.VarChar(50) // 员工编号
-  jobName     String    @map("job_name") @db.VarChar(100)  // 职位信息
+  // 用户名
+  userName    String?   @unique @map("user_name") @db.VarChar(100)
+  // 邮箱
+  email       String?   @unique @db.VarChar(100)
+  // 性别（0：男，1：女，2：位置)
+  sex         Int?      @unique @db.TinyInt
+  // 员工编号
+  no          String?   @unique @db.VarChar(50)
+  // 职位信息
+  jobName     String?   @map("job_name") @db.VarChar(100)
   createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
   updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
   status      Int       @default(1) @db.TinyInt
@@ -97,58 +88,71 @@ model User {
 // 账号
 model Account {
   id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(100)
-  email       String    @db.VarChar(100)
-  password    String    @db.VarChar(100)
+  // 账号
+  account     String?   @unique @db.VarChar(100)
+  // 邮箱
+  email       String?   @unique @db.VarChar(100)
+  // 密码
+  password    String?   @db.VarChar(100)
+  // 状态状态(0: 禁用, 1: 启用)
   state       Int       @default(0)
   createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
   updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
   status      Int       @default(1) @db.TinyInt
+  roles       Role[]
 
+  @@index([account, email])
   @@map("accounts")
 }
 
 // 角色
 model Role {
   id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(100)
-  creator     String    @db.VarChar(100)
-  menus       RoleMenu[]
+  // 角色名称
+  roleName    String?   @unique @map("role_name") @db.VarChar(100)
+  // 创建者
+  creator     String?   @db.VarChar(100)
   createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
   updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
   status      Int       @default(1) @db.TinyInt
-
+  accounts    Account[]
+  auths       Auth[]
   @@map("roles")
+}
+
+
+// 权限
+model Auth {
+  id          Int       @id @default(autoincrement())
+  // 权限名称
+  authName    String?   @unique @map("auth_name") @db.VarChar(100)
+  // 权限类型 (0：页面权限，1：操作权限，2：接口权限)
+  type        Int?      @db.TinyInt
+  // 备注
+  desc        String?   @db.VarChar(100)
+  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
+  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
+  status      Int       @default(1) @db.TinyInt
+  roles       Role[]
+  menus       Menu[]
+
+  @@map("auth")
 }
 
 // 菜单
 model Menu {
   id          Int       @id @default(autoincrement())
-  name        String?    @db.VarChar(100)
-  code        String?    @db.VarChar(50)
-  description String?    @db.VarChar(500)
-  path        String?    @db.VarChar(100)
+  menuName    String?   @unique @map("menu_name") @db.VarChar(100)
+  code        String?   @db.VarChar(50)
+  description String?   @db.VarChar(500)
+  path        String?   @db.VarChar(100)
   type        Int
   pid         Int
   creator     String    @db.VarChar(100)
-  roles       RoleMenu[]
   createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
   updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
   status      Int       @default(1) @db.TinyInt
+  auths        Auth[]
 
   @@map("menus")
 }
-
-model RoleMenu {
-  role        Role      @relation(fields: [roleId], references: [id])
-  roleId      Int       @map("role_id")
-  menu        Menu      @relation(fields: [menuId], references: [id])
-  menuId      Int       @map("menu_id")
-  createAt    DateTime  @default(now()) @map("created_at") @db.DateTime(6)
-  updateAt    DateTime  @updatedAt @map("updated_at") @db.DateTime(6)
-
-  @@id([roleId, menuId])
-
-  @@map("role_menu")
-}
-

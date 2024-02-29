@@ -4,6 +4,8 @@ export enum ResultStatus {
   Empty = '000002',
   Repeat = '000003',
   NoExist = '000004',
+  IsExist = '000005',
+  ParamsError = '000006',
   ServerError = '500',
 }
 
@@ -13,6 +15,8 @@ export const ResultMessage = {
   '000002': 'empty',
   '000003': 'repeat',
   '000004': 'no exist',
+  '000005': 'already exists',
+  '000006': 'params error',
   '404': '页面不存在！',
   '500': '服务器异常！',
 };

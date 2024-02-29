@@ -246,3 +246,30 @@ model User {
 - passport 
 - passport-local
 - express-session
+
+## redis
+```sh
+# 安装redis
+brew install redis
+# 启动redis
+redis-server
+# 根据不同配置文件启动Redis
+redis-server /path/to/your/redis.conf
+```
+
+## 接口权限验证
+### jwt
+优点：
+- 无需服务器存储，由客户端浏览器cookie进行存储
+缺点：
+- 只能在浏览器使用，无法在服务端内使用（例如：nodejs、java）
+### session
+缺点:
+- 需要服务器进行存储
+- session 返回的 cookie 只能用于客户端调用，无法在服务器内使用
+### token
+优点：
+- 只返回token，由提供方和调用方约定token放置位置（例如：请求头、body）
+缺点：
+- 需要服务器进行存储
+
