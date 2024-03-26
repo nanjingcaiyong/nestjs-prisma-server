@@ -1,6 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { SignDto } from '@/dto/account.dto';
 import { AuthService } from './auth.service';
+import { crypto } from '@/utils';
 import { BaseController } from '@/controller/base.controller';
 import { ResultStatus } from '@/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -15,7 +16,11 @@ export class AuthController extends BaseController {
   })
   @Post('login')
   async loginWithToken(@Body() acccount: SignDto) {
-    const { token } = (await this.authService.signWithRedis(acccount)) || {};
+    const { token } =
+      (await this.authService.signWithRedis({
+        account: acccount.account,
+        password: crypto.encodePassword(acccount.password),
+      })) || {};
     if (token) {
       return this.JsonBackResult(ResultStatus.Success, { token });
     }

@@ -36,8 +36,17 @@ export class AuthService {
    * @returns
    */
   async signWithRedis(account: SignDto) {
-    const res = await this.accountService.queryWithRolesByName<AccountWithRole>(
-      account.account,
+    const res = await this.accountService.query<AccountWithRole>(
+      {
+        where: account,
+      },
+      {
+        roles: {
+          include: {
+            auths: true,
+          },
+        },
+      },
     );
     if (res === null) {
       return null;
@@ -48,7 +57,7 @@ export class AuthService {
       name: res.account,
       expired: Date.now() + ONE_DAY, // 缓存过期时间
       roles: res.roles.map((t) => t.roleName),
-      auths: res.roles.reduce(
+      auths: res.roles?.reduce?.(
         (auths, role) => auths.concat(role.auths.map((t) => t.type)),
         [],
       ),

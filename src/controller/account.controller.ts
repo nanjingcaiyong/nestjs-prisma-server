@@ -20,7 +20,7 @@ import { isNil } from 'lodash';
 @ApiBearerAuth('authorization')
 @ApiTags('账号模块')
 @Controller('account')
-@Roles(Role.Common)
+@Roles(Role.Admin)
 export class AccountController extends BaseController {
   constructor(
     private readonly accountService: AccountService,

@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { crypto } from '../src/utils/crypto';
+import { Role } from '@/common';
 
 const prisma = new PrismaClient({});
 
@@ -17,39 +18,82 @@ async function createAdminAccount() {
         connectOrCreate: [
           {
             where: { roleName: 'admin' },
-            create: {
-              roleName: 'admin',
-              creator: 'caiyong',
-              auths: {
-                create: [
-                  {
-                    authName: 'visit',
-                    type: 0,
-                    desc: '查询接口操作权限',
-                  },
-                  {
-                    authName: 'add',
-                    type: 1,
-                    desc: '新增接口操作权限',
-                  },
-                  {
-                    authName: 'delete',
-                    type: 2,
-                    desc: '删除接口操作权限',
-                  },
-                  {
-                    authName: 'update',
-                    type: 3,
-                    desc: '更新接口操作权限',
-                  },
-                  {
-                    authName: 'all',
-                    type: 99,
-                    desc: '超级管理员权限',
-                  },
-                ],
+            create: [
+              {
+                roleName: Role.Common,
+                creator: 'system',
+                auths: {
+                  create: [
+                    {
+                      authName: 'visit',
+                      type: 0,
+                      desc: '查询接口操作权限',
+                    },
+                  ],
+                },
               },
-            },
+              {
+                roleName: Role.Admin,
+                creator: 'system',
+                auths: {
+                  create: [
+                    {
+                      authName: 'visit',
+                      type: 0,
+                      desc: '查询接口操作权限',
+                    },
+                    {
+                      authName: 'add',
+                      type: 1,
+                      desc: '新增接口操作权限',
+                    },
+                    {
+                      authName: 'delete',
+                      type: 2,
+                      desc: '删除接口操作权限',
+                    },
+                    {
+                      authName: 'update',
+                      type: 3,
+                      desc: '更新接口操作权限',
+                    },
+                  ],
+                },
+              },
+              {
+                roleName: Role.Super,
+                creator: 'system',
+                auths: {
+                  create: [
+                    {
+                      authName: 'visit',
+                      type: 0,
+                      desc: '查询接口操作权限',
+                    },
+                    {
+                      authName: 'add',
+                      type: 1,
+                      desc: '新增接口操作权限',
+                    },
+                    {
+                      authName: 'delete',
+                      type: 2,
+                      desc: '删除接口操作权限',
+                    },
+                    {
+                      authName: 'update',
+                      type: 3,
+                      desc: '更新接口操作权限',
+                    },
+                    {
+                      authName: 'all',
+                      type: 99,
+                      desc: '超级管理员权限',
+                    },
+                  ],
+                },
+              },
+            ],
           },
         ],
       },

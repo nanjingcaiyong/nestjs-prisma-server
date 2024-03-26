@@ -31,8 +31,11 @@ export class BaseService {
    * @param where lambda
    * @returns
    */
-  query<T>(where: any): Promise<T> {
-    return this.prisma[this.modelName].findFirst(where);
+  query<T>(where: any, include?: any): Promise<T> {
+    return this.prisma[this.modelName].findFirst({
+      where: where.where,
+      include,
+    });
   }
 
   /**
