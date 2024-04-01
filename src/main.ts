@@ -8,6 +8,7 @@ async function bootstrap() {
   if (process.env.NODE_ENV !== 'production') {
     initSwagger(app);
   }
+  app.enableCors();
   await app.listen(process.env.PORT);
 }
 
