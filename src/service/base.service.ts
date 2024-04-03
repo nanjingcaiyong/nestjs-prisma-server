@@ -22,6 +22,7 @@ export class BaseService {
     return this.prisma[this.modelName].findUnique({
       where: {
         id,
+        status: 1,
       },
     });
   }
